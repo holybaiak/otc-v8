@@ -28,20 +28,6 @@ EnterGameWindow
     anchors.right: parent.right
     anchors.top: prev.bottom
     margin-top: 2
-    
-  MenuLabel
-    !text: tr('Token')
-    anchors.left: prev.left
-    anchors.top: prev.bottom
-    text-auto-resize: true
-    margin-top: 8
-
-  TextEdit
-    id: accountTokenTextEdit
-    anchors.left: parent.left
-    anchors.right: parent.right
-    anchors.top: prev.bottom
-    margin-top: 2
 
   Panel
     id: serverSelectorPanel

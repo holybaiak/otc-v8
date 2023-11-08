@@ -395,7 +395,7 @@ end
 function EnterGame.clearAccountFields()
   enterGame:getChildById('accountNameTextEdit'):clearText()
   enterGame:getChildById('accountPasswordTextEdit'):clearText()
-  enterGame:getChildById('accountTokenTextEdit'):clearText()
+  --enterGame:getChildById('accountTokenTextEdit'):clearText()
   enterGame:getChildById('accountNameTextEdit'):focus()
   g_settings.remove('account')
   g_settings.remove('password')
@@ -422,7 +422,7 @@ function EnterGame.onServerChange()
   end
 end
 
-function EnterGame.doLogin(account, password, token, host)
+function EnterGame.doLogin(account, password, host) --token
   if g_game.isOnline() then
     local errorBox = displayErrorBox(tr('Login Error'), tr('Cannot login while already in game.'))
     connect(errorBox, { onOk = EnterGame.show })
@@ -431,7 +431,7 @@ function EnterGame.doLogin(account, password, token, host)
   
   G.account = account or enterGame:getChildById('accountNameTextEdit'):getText()
   G.password = password or enterGame:getChildById('accountPasswordTextEdit'):getText()
-  G.authenticatorToken = token or enterGame:getChildById('accountTokenTextEdit'):getText()
+  --G.authenticatorToken = token or enterGame:getChildById('accountTokenTextEdit'):getText()
   G.stayLogged = true
   G.server = serverSelector:getText():trim()
   G.host = host or serverHostTextEdit:getText()
@@ -538,7 +538,7 @@ function EnterGame.doLogin(account, password, token, host)
   
   if modules.game_things.isLoaded() then
     g_logger.info("Connecting to: " .. server_ip .. ":" .. server_port)
-    protocolLogin:login(server_ip, server_port, G.account, G.password, G.authenticatorToken, G.stayLogged)
+    protocolLogin:login(server_ip, server_port, G.account, G.password, G.stayLogged) --G.authenticatorToken 
   else
     loadBox:destroy()
     loadBox = nil
@@ -564,7 +564,7 @@ function EnterGame.doLoginHttp()
     email = G.account,
     password = G.password,
     accountpassword = G.password,
-    token = G.authenticatorToken,
+    --token = G.authenticatorToken,
     version = APP_VERSION,
     uid = G.UUID,
     stayloggedin = true

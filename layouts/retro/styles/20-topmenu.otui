@@ -86,15 +86,6 @@ TopMenu < TopMenuPanel
     margin-top: 3
     margin-left: 5
     image-source: /images/ui/discord
-    
-  Label
-    id: discordLabel
-    anchors.top: parent.top
-    anchors.bottom: parent.bottom
-    anchors.left: prev.right
-    text-align: center
-    margin-left: 2
-    text-auto-resize: true
 
   TopMenuButtonsPanel
     id: rightButtonsPanel
@@ -108,14 +99,6 @@ TopMenu < TopMenuPanel
     anchors.bottom: parent.bottom
     anchors.left: prev.right
     visible: false
-
-  Label
-    id: onlineLabel
-    anchors.top: parent.top
-    anchors.bottom: parent.bottom
-    anchors.horizontalCenter: parent.horizontalCenter
-    text-align: center
-    text-auto-resize: true
 
   TopMenuButtonsPanel
     id: leftButtonsPanel

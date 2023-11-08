@@ -5,7 +5,7 @@ DEFAULT_LAYOUT = "retro" -- on android it's forced to "mobile", check code bello
 
 -- If you don't use updater or other service, set it to updater = ""
 Services = {
-  website = "127.0.0.1/",
+  website = "http://127.0.0.1/",
   updater = "http://127.0.0.1/otclient-updater/v8/updater.php",--"http://127.0.0.1/api/updater-v8.php"
   stats = "http://127.0.0.1/otclient-updater/v8/stats.php", -- --"http://127.0.0.1/api/stats.php"
   crash = "", --"http://127.0.0.1/api/crash.php",
@@ -21,7 +21,7 @@ Servers = {
 --Server = "ws://yourwebsite:3000/"
 --Server = "ws://127.0.0.1:88/"
 --USE_NEW_ENERGAME = true -- uses entergamev2 based on websockets instead of entergame
-ALLOW_CUSTOM_SERVERS = true -- if true it shows option ANOTHER on server list
+ALLOW_CUSTOM_SERVERS = false -- if true it shows option ANOTHER on server list
 
 g_app.setName("Holy Baiak")
 -- CONFIG END
