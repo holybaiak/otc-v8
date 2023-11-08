@@ -11,7 +11,6 @@ Makefile
 *.o
 *.gch
 *.a
-*.exe
 !signtool.exe
 *.apk
 *.recipe*

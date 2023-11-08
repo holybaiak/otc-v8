@@ -10,7 +10,7 @@ Services = {
   stats = "http://127.0.0.1/otclient-updater/v8/stats.php", -- --"http://127.0.0.1/api/stats.php"
   crash = "", --"http://127.0.0.1/api/crash.php",
   feedback = "",--"http://127.0.0.1/api/feedback.php",
-  status = "http://127.0.0.1/otclient-updater/v8/status.php" --http://yourwebsite/api/status.php"
+  status = "" --http://yourwebsite/api/status.php"
 }
 
 -- Servers accept http login url, websocket login url or ip:port:version
