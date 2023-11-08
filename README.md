@@ -1,6 +1,6 @@
-# OTCLient v8
+# OTCLient V8
 
 OTClient V8 usado no projeto Holy Baiak.
 
 ## Repositório Base:
-- OTCliente: [V8](https://github.com/opentibiabr/otcv8)
+- OTCliente: [v8](https://github.com/opentibiabr/otcv8)
