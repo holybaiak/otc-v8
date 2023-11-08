@@ -1,16 +1,16 @@
 -- CONFIG
-APP_NAME = "otclientv8"  -- important, change it, it's name for config dir and files in appdata
+APP_NAME = "holybaiak"  -- important, change it, it's name for config dir and files in appdata
 APP_VERSION = 1341       -- client version for updater and login to identify outdated client
 DEFAULT_LAYOUT = "retro" -- on android it's forced to "mobile", check code bellow
 
 -- If you don't use updater or other service, set it to updater = ""
 Services = {
-  website = "https://docs.opentibiabr.com/",
-  updater = "",--"http://yourwebsite/api/updater.php"
-  stats = "", -- --"http://yourwebsite/api/stats.php"
-  crash = "", --"http://yourwebsite/api/crash.php",
-  feedback = "",--"http://yourwebsite/api/feedback.php",
-  status = "http://docs.opentibiabr.com" --http://yourwebsite/api/status.php"
+  website = "127.0.0.1/",
+  updater = "http://127.0.0.1/otclient-updater/v8/updater.php",--"http://127.0.0.1/api/updater-v8.php"
+  stats = "http://127.0.0.1/otclient-updater/v8/stats.php", -- --"http://127.0.0.1/api/stats.php"
+  crash = "", --"http://127.0.0.1/api/crash.php",
+  feedback = "",--"http://127.0.0.1/api/feedback.php",
+  status = "http://127.0.0.1/otclient-updater/v8/status.php" --http://yourwebsite/api/status.php"
 }
 
 -- Servers accept http login url, websocket login url or ip:port:version
@@ -23,7 +23,7 @@ Servers = {
 --USE_NEW_ENERGAME = true -- uses entergamev2 based on websockets instead of entergame
 ALLOW_CUSTOM_SERVERS = true -- if true it shows option ANOTHER on server list
 
-g_app.setName("OTCv8")
+g_app.setName("Holy Baiak")
 -- CONFIG END
 
 -- print first terminal message
