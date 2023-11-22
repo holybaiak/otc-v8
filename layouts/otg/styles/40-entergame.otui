@@ -1,0 +1,3 @@
+EnterGameWindow < StaticMainWindow
+  !text: tr('Journey Onwards')
+  size: 260 340

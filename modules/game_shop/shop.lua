@@ -280,7 +280,7 @@ end
 
 function onCoinBalance(coins, transferableCoins)
   if not shop or otcv8shop then return end
-  shop.infoPanel.points:setText(tr("Points:") .. " " .. coins)
+  shop.infoPanel.points:setText(tr("") .. " " .. coins)
   transferWindow.coinsBalance:setText(tr('Transferable Tibia Coins: ') .. coins)
   transferWindow.coinsAmount:setMaximum(coins)
   shop.infoPanel.buy:hide()
@@ -406,7 +406,7 @@ function processStatus(data)
   if data['buyUrl'] and data['buyUrl']:sub(1, 4):lower() == "http" then
     shop.infoPanel.buy:show()
     shop.infoPanel.buy.onMouseRelease = function() 
-      scheduleEvent(function() g_platform.openUrl(data['buyUrl']) end, 50)
+      scheduleEvent(function() g_platform.openUrl('google.com') end, 50)
     end
   else
     shop.infoPanel.buy:hide()
@@ -518,14 +518,16 @@ function addOffer(category, data)
       end)
     elseif data["image"] and data["image"]:len() > 1 then
       offer.image:setImageSource(data["image"])
+      offer.image2:setImageSource(data["image"])
     end
   else
     g_logger.error("Invalid shop offer type: " .. tostring(data["type"]))
     return
   end
   offer:setId("offer_" .. category .. "_" .. shop.offers:getChildCount())
-  offer.title:setText(data["title"] .. " (" .. data["cost"] .. " points)")
+  offer.title:setText(data["title"])
   offer.description:setText(data["description"])  
+  offer.price:setText(data["cost"])  
   offer.offerId = data["id"]
   if category ~= 0 then
     offer.onDoubleClick = buyOffer
@@ -547,6 +549,18 @@ function changeCategory(widget, newCategory)
       serviceType = 2
     end
     g_game.requestStoreOffers(newCategory.name:getText(), serviceType)
+  end
+  
+  if newCategory.name:getText() == "Home" then
+      shop.adPanel:setVisible(true)
+      shop.adOffers:setVisible(true)
+      shop.divad:setVisible(true)
+      shop.offers:setVisible(false)
+  else
+      shop.adPanel:setVisible(false)
+      shop.adOffers:setVisible(false)
+      shop.divad:setVisible(false)
+      shop.offers:setVisible(true)
   end
   
   browsingHistory = false
@@ -571,8 +585,49 @@ function buyOffer(widget)
   if not item then
     return
   end
+
+  selectedOffer = {category=category, offer=offer, image=item.image, title=item.title, description=item.description, cost=item.cost, id=widget.offerId}
   
-  selectedOffer = {category=category, offer=offer, title=item.title, cost=item.cost, id=widget.offerId}
+  print(selectedOffer.image)
+      shop.title:setText(selectedOffer.title)  
+      shop.description:setText(selectedOffer.description)  
+      shop.cost:setText(selectedOffer.cost)  
+      shop.image:setImageSource(selectedOffer.image)
+
+  scheduleEvent(function()
+      if msgWindow then
+        msgWindow:destroy()
+      end
+      
+      local title = tr("Buying from shop")
+      local msg = "Do you want to buy " ..  item.title .. " for " .. item.cost .. " Tibia Coins?\n\n\n"
+      msgWindow = displayGeneralBox(title, msg, {
+          { text=tr('Purchase'), callback=buyConfirmed },
+          { text=tr('Cancel'), callback=buyCanceled },
+          anchor=AnchorHorizontalCenter}, buyConfirmed, buyCanceled)
+      msgWindow:show()
+      msgWindow:raise()
+      msgWindow:focus()
+      msgWindow:raise()
+    end, 500)
+end
+
+function buyOffer2(widget)
+  if not widget then
+    return
+  end
+  local split = widget:getId():split("_")
+  if #split ~= 3 then
+    return
+  end
+  local category = tonumber(split[2])  
+  local offer = tonumber(split[3])  
+  local item = CATEGORIES[category]["offers"][offer]
+  if not item then
+    return
+  end
+
+  selectedOffer = {category=category, offer=offer, image=item.image, title=item.title, description=item.description, cost=item.cost, id=widget.offerId}
   
   scheduleEvent(function()
       if msgWindow then

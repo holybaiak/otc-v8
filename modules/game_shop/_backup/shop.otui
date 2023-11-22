@@ -1,0 +1,330 @@
+ShopCategory < Panel
+  size: 166 22
+  image-source: /images/store/cat
+  focusable: true
+  color: #C0C0C0
+  margin-top: 5
+  icon-size: 13 13
+
+  $focus:
+    size: 166 22
+    image-source: /images/store/catOn
+  
+  Label
+    id: name
+    anchors.top: parent.top
+    anchors.left: parent.left
+    anchors.right: parent.right
+    margin: 5
+    margin-left: 40
+    text-align: left
+    color: white
+    font: verdana-11px-rounded 
+  
+  Label
+    id: arrow
+    anchors.top: parent.top
+    anchors.right: parent.right
+    margin-top: 10
+    margin-right: 10
+    size: 7 4
+    image-source: arrowDown
+    visible: false
+
+ShopCategoryItem < ShopCategory
+  UILabel
+    id: item
+    anchors.top: prev.bottom
+    anchors.left: parent.left
+    margin-left: 10
+    virtual: true
+    size: 64 64
+    image-source: /images/store/cat
+
+ShopCategoryCreature < ShopCategory
+  UICreature
+    id: creature
+    anchors.top: parent.top
+    anchors.left: parent.left
+    anchors.bottom: parent.bottom
+    margin-top: 2
+    margin-bottom: 2
+    margin-left: 2
+    size: 13 13
+    
+ShopCategoryImage < ShopCategory
+  Label
+    id: image
+    anchors.top: parent.top
+    anchors.left: parent.left
+    margin-top: 5
+    margin-left: 10
+    size: 13 13       
+    
+    
+ShopCategoryIcon < ShopCategory
+  Label
+    id: icon
+    image-source: arrowDown
+    anchors.verticalCenter: parent.verticalCenter
+    anchors.right: parent.right
+    margin-left: 5
+    size: 7 4    
+    
+    
+    
+ShopOffer < Panel
+  size: 236 78
+  image-source: offerTemplate
+  
+  $focus:
+    image-source: offerTemplateOn
+
+  
+  $!focus:
+    image-source: offerTemplate
+
+  Label
+    id: title
+    anchors.left: parent.left
+    anchors.right: parent.right
+    anchors.top: parent.top
+    margin-top: 4
+    margin-left: 55
+    text-align: topleft
+    color: #C0C0C0
+    font: verdana-11px-rounded
+
+  Label
+    id: description
+    size: 266 241
+    anchors.right: parent.right
+    anchors.bottom: parent.bottom
+    margin-left: 55
+    margin-right: 55
+    text-align: topleft
+    text-auto-resize: true
+    text-wrap: true
+    color: white
+    font: verdana-11px-rounded
+    border: 1 red
+
+  Label
+    id: price
+    size: 48 48
+    anchors.right: parent.right
+    anchors.bottom: parent.bottom
+    margin-right: 20
+    margin-bottom: 7
+    text-align: right
+    text-auto-resize: true
+    text-wrap: true
+    color: white
+    font: verdana-11px-rounded
+    
+  Button
+    id: buyButton
+    text: BUY
+    height: 25
+    anchors.verticalCenter: parent.verticalCenter
+    anchors.left: prev.right
+    anchors.right: parent.right    
+    margin-right: 15
+    text-align: center
+    
+ShopOfferItem < ShopOffer
+  UIItem
+    id: item
+    anchors.top: parent.top
+    anchors.left: parent.left
+    anchors.bottom: parent.bottom
+    margin-top: 4
+    margin-bottom: 4
+    margin-left: 2
+    virtual: true
+    size: 64 64
+    border: 8 red
+    
+ShopOfferCreature < ShopOffer
+  UICreature
+    id: creature
+    anchors.top: parent.top
+    anchors.left: parent.left
+    anchors.bottom: parent.bottom
+    margin-top: 4
+    margin-bottom: 4
+    margin-left: 2
+    size: 64 64
+
+    
+ShopOfferImage2 < UILabel
+  Label
+    id: image2
+    anchors.top: parent.top
+    anchors.right: parent.right
+    margin-top: 4
+    margin-left: 5
+    size: 128 128
+    border: 3 red
+    
+ShopOfferImage < ShopOffer
+  Label
+    id: image
+    anchors.top: parent.top
+    anchors.left: parent.left
+    anchors.bottom: parent.bottom
+    margin-top: 4
+    margin-bottom: 4
+    margin-left: 5
+    size: 64 64
+  
+MainWindow
+  id: shopWindow
+  !text: tr('Store')
+  color: #C0C0C0
+  image-source: /images/store/window
+  size: 780 537
+  @onEscape: modules.game_shop.hide()
+  $mobile:
+    size: 780 537
+
+  Panel
+    id: infoPanel
+    anchors.bottom: parent.bottom
+    anchors.left: parent.left
+    width: 260
+    height: 60
+    margin-bottom: 10
+
+    Label
+      id: points
+      anchors.horizontalCenter: parent.horizontalCenter
+      anchors.top: parent.top
+      margin-top: 13
+      margin-right: 25
+      color: #C0C0C0
+      text: -
+      text-auto-resize: true
+    
+    Button
+      id: buy
+      anchors.horizontalCenter: parent.horizontalCenter
+      width: 150
+      anchors.top: prev.bottom
+      margin-right: 5
+      margin-top: 10
+      visible: false
+      !text: tr("Buy points")
+
+  Panel
+    id: adPanel
+    anchors.top: parent.top
+    anchors.left: parent.left
+    anchors.right: parent.right
+    margin-left: 192
+    margin-right: 14
+    margin-top: 11
+    size: 549 200
+    visible: false
+    image-source: /images/store/ad
+    visible: false
+
+  Panel
+    id: adOffers
+    image-source: /images/store/adOffers
+    anchors.top: adDiv.bottom
+    anchors.right: parent.right
+    margin-right: 7
+    margin-bottom: 47
+    visible: false
+    anchors.bottom: parent.bottom
+    visible: false
+
+  Panel
+    id: divad
+    image-source: /images/store/adDiv
+    anchors.verticalCenter: parent.verticalCenter
+    anchors.right: parent.right
+    margin-right: 7
+    margin-bottom: 32
+    size: 549 12
+    visible: false
+  
+  TextList    
+    id: categories
+    size: 180 450
+    image-source: /images/store/categories
+    vertical-scrollbar: categoriesScrollBar
+    anchors.top: parent.top
+    anchors.left: parent.left
+    margin-top: 3
+    padding: 1
+    focusable: false
+
+  VerticalScrollBar
+    id: categoriesScrollBar
+    anchors.top: categories.top
+    anchors.bottom: categories.bottom
+    anchors.right: categories.right
+    step: 50
+    pixels-scroll: true
+    visible: false
+
+  TextList
+    id: offers
+    vertical-scrollbar: offersScrollBar
+    anchors.top: parent.top
+    anchors.left: parent.left
+    anchors.bottom: parent.bottom
+    width: 236
+    margin-right: 1
+    margin-left: 195
+    margin-top: 42
+    margin-bottom: 50
+    padding: 1
+    visible: false
+    focusable: false
+
+  VerticalScrollBar
+    id: offersScrollBar
+    anchors.top: offers.top
+    anchors.bottom: offers.bottom
+    anchors.left: offers.right
+    margin-left: 5
+    step: 50
+    pixels-scroll: true
+    visible: false
+
+  UIButton
+    id: transactionHistory
+    size: 43 20
+    anchors.right: parent.right
+    margin-right: 47
+    anchors.bottom: parent.bottom
+    @onClick: modules.game_shop.showHistory()
+    visible: false
+
+  UIButton
+    id: transferOpen
+    size: 64 20
+    anchors.horizontalCenter: parent.horizontalCenter
+    margin-right: 8
+    anchors.bottom: parent.bottom
+    @onClick: modules.game_shop.showTransfer()
+    visible: false
+
+  UIButton
+    id: buttonCancel
+    size: 43 20
+    anchors.right: parent.right
+    anchors.bottom: parent.bottom
+    @onClick: modules.game_shop.hide()
+
+
+  UILabel
+    id: imageShow
+    anchors.top: parent.top
+    anchors.right: parent.right
+    margin-top: 80
+    margin-right: 175
+    size: 96 96
